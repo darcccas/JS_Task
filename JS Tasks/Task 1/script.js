@@ -9,23 +9,26 @@ Pastaba: atvaizdavimas turi būti matomas pateikus formą ir pateikiamas
 <div id="output"></div> viduje, bei turi turėti bent minimalų stilių;
 ------------------------------------------------------------------- */
 
-document.querySelector("form").addEventListener("submit", displayData);
+document.querySelector("form").addEventListener("submit", inputHandle);
 let lb;
 let g;
 let oz;
-function displayData(e) {
+function inputHandle(e) {
   e.preventDefault();
-  document.querySelector("#output").innerHTML = "";
   const inputElement = document.querySelector("#search").value;
   convertWeight(inputElement);
-  const displayElement = document.createElement("h2");
-  displayElement.innerHTML = `${inputElement} kg converted to Pounds = ${lb} lb <br/>
-    ${inputElement} kg converted to Grams = ${g} g <br/> ${inputElement} kg converted to Ounces = ${oz} oz`;
-  document.querySelector("#output").appendChild(displayElement);
+  domDisplay(inputElement);
 }
 
 function convertWeight(kg) {
   lb = kg * 2.2046;
   g = kg / 0.001;
   oz = kg * 35.274;
+}
+function domDisplay(data) {
+  document.querySelector("#output").innerHTML = "";
+  const displayElement = document.createElement("h2");
+  displayElement.innerHTML = `${data} kg to Pounds = ${lb} lbs <br/>
+    ${data} kg to Grams = ${g} g <br/> ${data} kg to Ounces = ${oz} oz`;
+  document.querySelector("#output").appendChild(displayElement);
 }
